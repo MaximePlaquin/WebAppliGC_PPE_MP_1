@@ -1,0 +1,43 @@
+
+.body{ background-color:  aliceblue;}
+
+.formulaire{ margin-top: 60px; margin-left: 300px;}
+.saisieNumcli{ width: 200px; margin-top: 20px;}
+.champSaisieNumCli{
+    
+    width: 35px; text-align:  center; background-color:  beige;
+}
+
+.bouton{ border-radius:  15px; width: 60px; text-align:  center;  margin-left:470px; margin-top:-40px
+}
+
+.separateur{
+    
+   margin-left: 0px; width: 915px;margin-top:30px;
+    
+}
+
+.infosClient {
+           background-color: silver;
+           border-radius: 10px;
+           width: 900px;
+           border: solid deepskyblue; 
+           background-color:  beige;
+}
+
+.tableau {
+           margin-top: 20px;
+           background-color: silver;
+           border-radius: 10px;
+           width: 860px;
+           border: solid deepskyblue;            
+}
+
+
+
+
+.colNumCom    {width: 40%; text-align:  center; }
+.colDateCom   {width: 40%; text-align:  center; }
+.colStatutCom {width: 20%; text-align:  center ;}
+
+

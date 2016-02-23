@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+        <h:outputStylesheet library="css" name="stylesExo4.css"/> 
+        <title>Clients par Commande</title>
+</h:head>
+    
+<h:body>
+        
+  <h:form  id="formulaireExo2" styleClass="formulaire">
+                   
+    <p:panelGrid styleClass="saisieNumcom" columns="3"  >
+     
+       
+      <p:outputLabel value="N° de la Commande:" for="numcom"  />
+      <p:inputText id="numcom" value="#{contExoPageJsf.numcomRecherche}"       
+                   title="Saisir un N° de commande" 
+                   styleClass="champSaisieNumCom"
+                   required="true" 
+      >  
+      </p:inputText>   
+      <p:messages id="messages"  showDetail="true"  
+                  closable="true"  showSummary="false"/>                          
+    </p:panelGrid>
+    <p:commandButton    value="OK"  update="@all" 
+                        action="#{contExoPageJsf.ecouteurRecherche()}"
+              
+                                  
+                        styleClass="bouton"                                    
+     />   
+    
+                 
+     <p:separator  styleClass="separateur"/>
+            
+     <p:panel  header="Informations du client #{contExoPageJsf.commande.leClient.nomCli}" 
+               styleClass="infosClient" 
+               toggleable="true"  collapsed="false" 
+               closeSpeed="500"   toggleTitle="Réduire">
+     
+       <p:ajax event="toggle"   update="@all"/>
+       <p:outputLabel value="Etat Commande: "></p:outputLabel>
+       <h:outputText value="#{contExoPageJsf.commande.etatCom}"/>
+            
+       <br/> 
+       <p:outputLabel value="Date Commande: "></p:outputLabel>
+       <h:outputText value="#{contExoPageJsf.commande.dateCom}">
+        <f:convertDateTime pattern="dd/MM/yyyy"  
+                                      timeZone="Europe/Paris"/>
+       
+         </h:outputText>
+       
+       
+       
+       <br/> 
+       <p:outputLabel value="Numero Client: "></p:outputLabel>
+       <h:outputText value="#{contExoPageJsf.commande.leClient.numCli}" />
+            
+       <br/> 
+       <p:outputLabel value="Nom Client: "></p:outputLabel>
+       <h:outputText value="#{contExoPageJsf.commande.leClient.nomCli}" />
+            
+       <br/> 
+       <p:outputLabel value="Adresse Client: "></p:outputLabel>
+       <h:outputText value="#{contExoPageJsf.commande.leClient.adrCli}" />
+            
+       <br/> 
+       <p:outputLabel value="Nom Région: "></p:outputLabel>
+       <h:outputText value="#{contExoPageJsf.commande.leClient.laRegion.nomRegion}" />
+      <br/> 
+      <p:outputLabel value="Taux remise: "></p:outputLabel>
+      <h:outputText value="#{contExoPageJsf.commande.leClient.tauxRemCli}" >
+                  
+        <f:convertNumber type="currency"     currencySymbol="%"
+                         groupingUsed="true" minFractionDigits="2" />
+        
+         
+     </h:outputText>  
+      <br/> 
+    <p:outputLabel value="Chiffre d'Affaire Annuel Commande: "></p:outputLabel>
+     <h:outputText value="#{contExoPageJsf.caAnnuelCommande}">
+                  
+        <f:convertNumber type="currency"     currencySymbol="€"
+                         groupingUsed="true" minFractionDigits="2" />
+        
+         
+     </h:outputText>    
+      <br/>
+      <p:outputLabel value="Montant Hors Taxe: "></p:outputLabel>
+      <h:outputText value="#{contExoPageJsf.mtnHT}">
+         <f:convertNumber type="currency"     currencySymbol="€"
+                         groupingUsed="true" minFractionDigits="2" />
+      </h:outputText>    
+      <br/> 
+      <p:outputLabel value="Montant TTC: "></p:outputLabel>
+      <h:outputText value="#{contExoPageJsf.mtnTTC}">          
+        <f:convertNumber type="currency"     currencySymbol="€"
+                         groupingUsed="true" minFractionDigits="2" />
+        
+         
+     </h:outputText>    
+      <br/> 
+      <p:outputLabel value="Solde Client: "></p:outputLabel>
+      <h:outputText value="#{contExoPageJsf.soldeClt}">
+                  
+        <f:convertNumber type="currency"     currencySymbol="€"
+                         groupingUsed="true" minFractionDigits="2" />
+        
+         
+     </h:outputText>    
+      <br/> 
+      <p:dataTable 
+          value="#{contExoPageJsf.commande.lesLignesDeCommande}" var="lgdc" 
+            styleClass="tableau"
+            paginator="true" rows="5"
+            paginatorTemplate="{FirstPageLink} {PreviousPageLink}
+                               {NextPageLink} {PageLinks} {LastPageLink}"
+                         
+            emptyMessage="#{contExo3.messageTableau}" 
+        >
+        
+               <f:facet name="header">  
+                   Liste des Commandes  de la commande :#{contExoPageJsf.commande.numCom}
+               </f:facet> 
+                
+               <p:column  headerText="Reference"  styleClass="colNumCom">
+                   #{lgdc.leProduit.refProd} 
+               </p:column>
+                 <p:column  headerText="Designation"  styleClass="colDesigCom">
+                   #{lgdc.leProduit.desigProd} 
+               </p:column>
+            <p:column  headerText="Prix Unitaire"  styleClass="colPrixUnitCom">
+                   <h:outputText value="#{contExoPageJsf.ProduitUnitaire(lgdc)}">
+                   <f:convertNumber type="currency"     currencySymbol="€"
+                         groupingUsed="true" minFractionDigits="2" />
+                   </h:outputText>
+               </p:column>
+          
+          <p:column  headerText="Chiffre d'affaire HT"  styleClass="colHTCom">
+                  <h:outputText value="#{contExoPageJsf.mtnHTLigne(lgdc)}"> 
+                   <f:convertNumber type="currency"     currencySymbol="€"
+                         groupingUsed="true" minFractionDigits="2" />
+                   </h:outputText>
+               </p:column>
+          <p:column  headerText="Chiffre d'affaire TTC"  styleClass="colTTCCom">
+                   <h:outputText value="#{contExoPageJsf.mtnTTCLigne(lgdc)}">
+                   <f:convertNumber type="currency"     currencySymbol="€"
+                         groupingUsed="true" minFractionDigits="2" />
+                   </h:outputText>
+               </p:column>
+          <p:column  headerText="Quantité commande"  styleClass="colTTCCom">
+              <h:outputText value="#{lgdc.qteCom}">
+                   <f:convertNumber type="currency"
+                         groupingUsed="true" minFractionDigits="2" />
+                   </h:outputText>
+               </p:column>
+        
+
+        
+         </p:dataTable> 
+                        
+   </p:panel>
+                  
+  </h:form>
+   
+ </h:body>
+</html>
+
