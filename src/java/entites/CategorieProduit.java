@@ -14,6 +14,7 @@ public class CategorieProduit implements Serializable {
     @Id
     private String codeCateg;
     private String nomCateg;
+    private Float tauxTvaCateg;
     
    
     @OneToMany(mappedBy = "laCategorie", cascade=CascadeType.ALL)
@@ -31,7 +32,19 @@ public class CategorieProduit implements Serializable {
         System.out.printf("%-8s %-20s",codeCateg,nomCateg);
     }
     
+    
     //<editor-fold defaultstate="collapsed" desc="GETTERS ET SETTERS">
+    
+    
+    public Float getTauxTvaCateg() {
+        return tauxTvaCateg;
+    }
+
+    public void setTauxTvaCateg(Float tauxTvaCateg) {
+        this.tauxTvaCateg = tauxTvaCateg;
+    }
+    
+    
     public String getCodeCateg() {
         return codeCateg;
     }

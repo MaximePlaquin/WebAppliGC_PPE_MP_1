@@ -1,6 +1,7 @@
 package bal.commande;
 
 
+import bal.lignedecommande.BalLigneDeCommande;
 import bal.tranchetarifaire.BalTrancheTarifaire;
 import dao.tva.DaoTva;
 import dto.commande.ResumeCommande;
@@ -17,6 +18,7 @@ public class BalCommandeImpl implements BalCommande,Serializable{
        
     @Inject DaoTva      daoTva;
     @Inject BalTrancheTarifaire balTT;
+    @Inject BalLigneDeCommande balLGDC;
     
     @Override
     public Float montantCommandeHT(Commande pCommande) {
@@ -26,11 +28,7 @@ public class BalCommandeImpl implements BalCommande,Serializable{
         if(pCommande!=null){
           for(LigneDeCommande lgdc: pCommande.getLesLignesDeCommande()){
               
-           Produit p = lgdc.getLeProduit();
-           Float qte = lgdc.getQteCom();
-           Float Prixprod = balTT.prixProd(p, qte);
-        
-           montant+=qte*Prixprod;
+              montant += balLGDC.mntHTlgdc(lgdc);
           }
         }
         else montant=null;
@@ -41,7 +39,15 @@ public class BalCommandeImpl implements BalCommande,Serializable{
     @Override
     public Float montantCommandeTTC(Commande pCommande) {
          
-        return montantCommandeHT(pCommande)*(1+daoTva.getTauxTVA());
+        Float r = 0F;
+        
+        for (LigneDeCommande lgdc : pCommande.getLesLignesDeCommande()){
+            
+            r += balLGDC.mntTTClgdc(lgdc);
+               
+        }
+        
+        return r;
     }
   
     @Override

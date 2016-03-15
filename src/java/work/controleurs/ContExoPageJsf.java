@@ -84,6 +84,17 @@ public class ContExoPageJsf implements Serializable{
     }
 
     //<editor-fold defaultstate="collapsed" desc="Get set">
+    
+    public Float prixUnitaire(LigneDeCommande lgdc){
+        
+    return balTrancheTarifaire.prixProd(lgdc.getLeProduit(), lgdc.getQteCom());
+    }
+    public Float mtnHTLgdc (LigneDeCommande lgdc){
+        return balLigneDeCommande.mntHTlgdc(lgdc);
+    }
+    public Float mtnTTCLgdc (LigneDeCommande lgdc){
+        return balLigneDeCommande.mntTTClgdc(lgdc);
+    }
     public DaoCommande getDaoCommande() {
         return daoCommande;
     }

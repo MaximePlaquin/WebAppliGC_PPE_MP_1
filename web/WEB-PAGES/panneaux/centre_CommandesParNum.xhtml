@@ -125,21 +125,35 @@
                  <p:column  headerText="Designation"  styleClass="colDesigCom">
                    #{lgdc.leProduit.desigProd} 
                </p:column>
+          
+                  <p:column  headerText="quantité"  styleClass="colPrixUnitCom">
+                      <h:outputText value="#{lgdc.qteCom}">
+                   </h:outputText>
+               </p:column>
+          
+          
+          
+          
             <p:column  headerText="Prix Unitaire"  styleClass="colPrixUnitCom">
-                   <h:outputText value="#{contExoPageJsf.ProduitUnitaire(lgdc)}">
+                <h:outputText value="#{contExoPageJsf.prixUnitaire(lgdc)}">
                    <f:convertNumber type="currency"     currencySymbol="€"
                          groupingUsed="true" minFractionDigits="2" />
                    </h:outputText>
                </p:column>
           
+             <p:column  headerText="Taux TVA"  styleClass="colPrixUnitCom">
+                 <h:outputText value="#{lgdc.leProduit.laCategorie.tauxTvaCateg}">
+                   </h:outputText>
+               </p:column>
+          
           <p:column  headerText="Chiffre d'affaire HT"  styleClass="colHTCom">
-                  <h:outputText value="#{contExoPageJsf.mtnHTLigne(lgdc)}"> 
+              <h:outputText value="#{contExoPageJsf.mtnHTLgdc(lgdc)}"> 
                    <f:convertNumber type="currency"     currencySymbol="€"
                          groupingUsed="true" minFractionDigits="2" />
                    </h:outputText>
                </p:column>
           <p:column  headerText="Chiffre d'affaire TTC"  styleClass="colTTCCom">
-                   <h:outputText value="#{contExoPageJsf.mtnTTCLigne(lgdc)}">
+              <h:outputText value="#{contExoPageJsf.mtnTTCLgdc(lgdc)}">
                    <f:convertNumber type="currency"     currencySymbol="€"
                          groupingUsed="true" minFractionDigits="2" />
                    </h:outputText>

@@ -16,6 +16,7 @@ import javax.inject.Singleton;
 @Singleton
 public class BalLigneDeCommandeImpl implements BalLigneDeCommande, Serializable {
     
+    @Inject DaoTva daotva;
 @Override
 public Float prixUnitaire (LigneDeCommande lgdc ){
     
@@ -32,13 +33,19 @@ public Float prixUnitaire (LigneDeCommande lgdc ){
         }
     }
     return prix;
-}    
+}
+@Override
 public Float mntHTlgdc (LigneDeCommande lgdc){
     
     return prixUnitaire(lgdc)*lgdc.getQteCom();
     
 }
-// mntHT*T
+
+@Override
+public Float mntTTClgdc (LigneDeCommande lgdc){
+    
+    return mntHTlgdc(lgdc)*(1+lgdc.getLeProduit().getLaCategorie().getTauxTvaCateg());
+}
 
 
 }

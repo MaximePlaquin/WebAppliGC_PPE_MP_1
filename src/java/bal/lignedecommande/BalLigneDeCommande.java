@@ -13,5 +13,7 @@ import entites.LigneDeCommande;
 public interface BalLigneDeCommande {
 
     Float prixUnitaire(LigneDeCommande lgdc);
+    Float mntHTlgdc(LigneDeCommande lgdc);
+    Float mntTTClgdc(LigneDeCommande lgdc);
        
 }
