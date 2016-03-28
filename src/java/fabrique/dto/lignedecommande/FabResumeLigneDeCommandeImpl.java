@@ -3,6 +3,7 @@ package fabrique.dto.lignedecommande;
 
 import dao.tva.DaoTva;
 import dto.lignedecommande.ResumeLigneDeCommande;
+import entites.Commande;
 import entites.LigneDeCommande;
 import entites.Produit;
 import java.io.Serializable;
@@ -51,5 +52,12 @@ public class FabResumeLigneDeCommandeImpl implements FabResumeLigneDeCommande, S
        return listeRlgc;
 
     }
+
+    @Override
+    public List<ResumeLigneDeCommande> creerListeResumeLigneCommande(Commande cmd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
     
 }

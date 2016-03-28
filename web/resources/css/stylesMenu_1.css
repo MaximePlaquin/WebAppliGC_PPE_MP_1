@@ -61,8 +61,8 @@
 .tableau {
            background-color: silver;
            border-radius: 15px;
-           width: 720px; 
            border: solid deepskyblue; 
+           position: static;
        
            
            

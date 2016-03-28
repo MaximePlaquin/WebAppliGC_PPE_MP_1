@@ -9,6 +9,7 @@ import entites.Commande;
 import entites.LigneDeCommande;
 import fabrique.dto.commande.FabResumesCommandes;
 import fabrique.dto.lignedecommande.FabResumeLigneDeCommande;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -32,7 +33,7 @@ public class WebServRestCommande {
   @Inject FabResumeLigneDeCommande fabrc;
   @Inject DaoClient daoclient;
   
-   // @GET
+   @GET
     @Path("{numCom}")
     @Produces({"application/xml","application/json"})
     public ResumeCommande CommandeNumCom(@PathParam("numCom")Long numCom) {
@@ -66,21 +67,21 @@ public class WebServRestCommande {
     
   
     
-    @GET
-    @Path("lignesdecommande/{numCom}")
-    @Produces({"application/xml","application/json"})
-    
-     public List<ResumeLigneDeCommande> getLesLignesDeCommandes(@PathParam("numCom")Long numCom){
-    
-     Commande cmd = dao.getCommande(numCom);
-     List<LigneDeCommande> ldc = cmd.getLesLignesDeCommande();
-     List<ResumeLigneDeCommande> rldc =  fabrc.creerListeResumeLigneCommande(ldc);
-    
-     
-     return rldc;
-       
-     
-    }
+    /*    @GET
+     * @Path("lignesdecommande/{numCom}")
+     * @Produces({"application/xml","application/json"})
+     * 
+     * public List<ResumeLigneDeCommande> getLesLignesDeCommandes(@PathParam("numCom")Long numCom){
+     * 
+     * Commande cmd = dao.getCommande(numCom);
+     * List<LigneDeCommande> ldc = cmd.getLesLignesDeCommande();
+     * 
+     * 
+     * rldc.
+     * return rldc;
+     * 
+     * 
+     * }*/
     
     @GET
     @Path("client/{numCli}")
